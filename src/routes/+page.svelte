@@ -6,9 +6,9 @@
     <p class=" mt-20 text-center text-xl">PoC of Svelte</p>
 </header>
 
-<section class="mt-20 p-20 grid grid-cols-5 h-screen">
+<section class="mt-20 p-20 grid grid-cols-4 h-screen">
     <Card title="Drag & Drop" url="drag-and-drop"/>
-    <Card title="Card" url="#"/>
+    <Card title="Popup Menue" url="#"/>
     <Card title="CRUD" url="#"/>
     <Card title="File Updaload" url="#"/>
     <Card title="Basic Form" url="#"/>
