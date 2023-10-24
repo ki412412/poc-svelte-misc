@@ -12,5 +12,5 @@
     <Card title="CRUD" url="#"/>
     <Card title="File Upload" url="#"/>
     <Card title="Basic Form" url="#"/>
-    <Card title="Form Validation" url="#"/>
+    <Card title="Form Validation" url="form-validation"/>
 </section>
