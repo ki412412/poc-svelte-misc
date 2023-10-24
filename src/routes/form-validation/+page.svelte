@@ -6,7 +6,7 @@
 	export let data: PageData;
 
 	// Client API:
-	const { form, errors, constraints } = superForm(data.form);
+	const { form, errors, constraints, enhance } = superForm(data.form);
 </script>
 
 <div><a href="/">Go Back</a></div>
@@ -16,7 +16,7 @@
 <SuperDebug data={$form} />
 
 <div class="w-fit m-auto text-lg mt-10">
-    <form method="POST" class="flex flex-col gap-6">
+    <form method="POST" class="flex flex-col gap-6" use:enhance>
         <div class="flex flex-col">
             <label for="name">Name</label>
             <input type="text" name="name" aria-invalid={$errors.name ? 'true' : undefined} bind:value={$form.name} {...$constraints.name} class="px-6 text-gray-900 rounded-full leading-10" />
