@@ -6,14 +6,15 @@
 	export let data: PageData;
 
 	// Client API:
-	const { form, errors, constraints, enhance } = superForm(data.form);
+	const { form, errors, constraints, enhance } = superForm(data.form, { validationMethod: 'oninput' });
 </script>
 
 <div><a href="/">Go Back</a></div>
 <h1 class="mt-10 font-mono font-bold text-white text-9xl text-center">Form Validation</h1>
 <p class="mt-10 text-center text-xl">Using Superforms💎</p>
 
-<SuperDebug data={$form} />
+<div class="w-[35rem] m-auto"><SuperDebug data={$form} /></div>
+
 
 <div class="w-fit m-auto text-lg mt-10">
     <form method="POST" class="flex flex-col gap-6" use:enhance>
