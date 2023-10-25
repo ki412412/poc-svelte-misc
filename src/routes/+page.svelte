@@ -9,7 +9,7 @@
 <section class="mt-20 p-20 grid grid-cols-4 h-screen">
     <Card title="Drag & Drop" url="drag-and-drop"/>
     <Card title="Popup Menue" url="#"/>
-    <Card title="CRUD" url="#"/>
+    <Card title="CRUD" url="crud"/>
     <Card title="File Upload" url="#"/>
     <Card title="Basic Form" url="#"/>
     <Card title="Form Validation" url="form-validation"/>
