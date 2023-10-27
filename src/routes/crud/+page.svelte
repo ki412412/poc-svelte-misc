@@ -1,7 +1,8 @@
 <script lang="ts">
     import type { PageData } from './$types';
+    import Code from '$lib/Code.svelte';
+    
     export let data: PageData;
-
 </script>
 
 <p class="mt-10 text-center text-xl">--- Read ---</p>
@@ -23,6 +24,21 @@
             </a>
         </div>
     </div>
-
 </div>
+
+<section class="mt-10">
+    <p class="mt-10 font-mono font-bold text-white text-3xl">💻 Source Code</p>
+
+    <div class="mt-6 flex flex-col gap-6">
+        <div>
+            <legend>+page.server.svelte</legend>
+            <Code url={'https://raw.githubusercontent.com/ki412412/poc-svelte-misc/main/src/routes/crud/%2Bpage.server.ts'}/>
+        </div>
+        <div class="">
+            <legend>+page.svelte</legend>
+            <Code url={'https://raw.githubusercontent.com/ki412412/poc-svelte-misc/main/src/routes/crud/%2Bpage.svelte'}/>
+        </div>
+    </div>
+</section>
+
 
