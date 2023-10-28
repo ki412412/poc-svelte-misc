@@ -17,5 +17,6 @@
     {/if}
 </div>
 <h1 class="mt-10 font-mono font-bold text-white text-9xl text-center">CRUD</h1>
+<p class="text-sm text-center">Avatars are burned every hour🔥</p>
 
 <slot/>
