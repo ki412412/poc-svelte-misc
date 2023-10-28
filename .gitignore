@@ -8,3 +8,7 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# static/* except static/favicon.png 
+/static/*
+!/static/favicon.png

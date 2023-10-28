@@ -1,6 +1,6 @@
 import { superValidate, message } from 'sveltekit-superforms/server';
 import { error, fail, redirect, type Actions } from '@sveltejs/kit';
-
+import { writeFileSync } from 'fs';
 import { users, userId, userSchema } from '$lib/users';
 
 const crudSchema = userSchema.extend({
@@ -20,7 +20,7 @@ export const load = async ({ url, params }) => {
 };
 
 export const actions: Actions = {
-    update: async ({ request }) => {
+    update: async ({ request, url }) => {
         const formData = await request.formData();
         const form = await superValidate(formData, crudSchema);
 
@@ -35,6 +35,14 @@ export const actions: Actions = {
 
         // UPDATE user
         users[index] = { ...form.data, id: form.data.id };
+
+        // UPDATE avatar
+        const avatar = formData.get('avatar') as File;
+        if (avatar.size !== 0) {
+            writeFileSync(`static/${avatar.name}`, Buffer.from(await avatar.arrayBuffer()));
+            users[index].avatar = `${url.origin}/${avatar.name}`;
+        }
+        
         return message(form, 'Updated!');
     },
     delete: async ({ request }) => {

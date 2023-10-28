@@ -13,15 +13,7 @@ export const userSchema = z.object({
     id: z.string().regex(/^\d+$/),
     name: z.string().min(2),
     email: z.string().email(),
-    avatar: z.custom<FileList>()
-            .refine((file) => file.length !== 1, { message: 'Required.' })
-            .transform((file) => file[0])
-            .refine((file) => file.size <= MAX_FILE_SIZE, { message: 'Max image size is 5MB.' })
-            .refine(
-                (file) => ACCEPTED_IMAGE_MIME_TYPES.includes(file?.type),
-                "Only .jpg, .jpeg, .png and .webp formats are supported."
-            )
-            .optional().nullable()
+    avatar: z.string().url().optional(),
 });
 
 type UserDB = z.infer<typeof userSchema>[];
