@@ -9,20 +9,21 @@
 
 	const { form, errors, constraints, enhance, delayed, message } = superForm(data.form);
 
-    let photoPreview: string | ArrayBuffer | null;
+    function showPreview(event: Event) {
+        const target = event.target;
+        const files = target.files;
 
-    function previewPhoto(e: Event) {
-        const image = e.target?.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = e => {
-            photoPreview = e.target.result
-        };
+        if (files.length > 0) {
+            const src = URL.createObjectURL(files[0]);
+            const preview = document.getElementById('avatar-preview') as HTMLImageElement;
+            preview.src = src;
+        }
     }
 </script>
 
 <p class="mt-10 text-center text-xl">--- {!$form.id ? 'Create' : 'Update'} ---</p>
 
+<SuperDebug data={$form}/>
 <div class="w-fit m-auto text-lg mt-10">
     {#if $message}
         <h3 class="text-center text-lime-400" class:!text-red-600={$page.status >= 400} >{$message}</h3>
@@ -35,20 +36,11 @@
             <div>
                 <div class="flex items-center justify-center overflow-hidden">
                     <label for="avatar" class="overflow-hidden hover:cursor-pointer">
-                        {#if photoPreview}
-                            <img class=" w-52 aspect-square rounded-full overflow-hidden" src={photoPreview} alt="Avatar" />
-                        {:else}
-                            {#if $form.avatar}
-                                <img class=" w-52 aspect-square rounded-full overflow-hidden" src="{$form.avatar}" alt="Avatar" />
-                            {:else}
-                            <figure>
-                                <svg class="w-52 h-52"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>                                  
-                            </figure>
-                            {/if}
-                        {/if}
-                        <!-- edit icon -->
+                        <img class="w-52 aspect-square rounded-full overflow-hidden"
+                            id="avatar-preview" 
+                            src={$form.avatar ?? `https://ui-avatars.com/api/?name=${$form.name}`}
+                            alt="Avatar"
+                        />
                     </label>
                     <label for="avatar" class="self-end cursor-pointer -ml-5 hover:text-gray-200">
                         <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
@@ -58,7 +50,7 @@
                     </label>
                 </div>
             </div>
-            <input class="hidden" type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" on:change={(e)=>previewPhoto(e)} />
+            <input class="hidden" type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" on:change={showPreview} />
             {#if $errors.avatar}<span class="text-red-600">{$errors.avatar}</span>{/if}
         </div>
         <div class="flex flex-col">
