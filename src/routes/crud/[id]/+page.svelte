@@ -23,7 +23,7 @@
 
 <p class="mt-10 text-center text-xl">--- {!$form.id ? 'Create' : 'Update'} ---</p>
 
-<SuperDebug data={$form}/>
+<!-- <SuperDebug data={data}/> -->
 <div class="w-fit m-auto text-lg mt-10">
     {#if $message}
         <h3 class="text-center text-lime-400" class:!text-red-600={$page.status >= 400} >{$message}</h3>
@@ -38,7 +38,7 @@
                     <label for="avatar" class="overflow-hidden hover:cursor-pointer">
                         <img class="w-52 aspect-square rounded-full overflow-hidden"
                             id="avatar-preview" 
-                            src={$form.avatar ?? `https://ui-avatars.com/api/?name=${$form.name}`}
+                            src={data.form.data.avatar ?? `https://ui-avatars.com/api/?name=${$form.name}`}
                             alt="Avatar"
                         />
                     </label>
