@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: svelte-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - NODE_ENV=development
+      - PORT=5173
+      - ORIGIN=http://54.250.243.145
+    ports:
+      - 80:5173
+    volumes:
+      - ./src:/app/src
+      - ./static:/app/static
+      - ./vite.config.js:/app/vite.config.js
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./svelte.config.js:/app/svelte.config.js
